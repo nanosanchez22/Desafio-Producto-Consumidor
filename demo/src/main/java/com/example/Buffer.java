@@ -51,7 +51,7 @@ class Buffer {
         }
     }
 
-    public void consume(String consumerName){
+    public int consume(String consumerName){
         try
         {
             full.acquire();
@@ -64,10 +64,11 @@ class Buffer {
             print();
             mutex.release();
             empty.release();
+            return item;
         }
         catch(InterruptedException e)
         {
-            return;
+            return 0;
         }
         
     }
