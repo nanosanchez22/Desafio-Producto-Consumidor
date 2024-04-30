@@ -14,7 +14,9 @@ class Proceso2 extends Thread{
         try {
             while (true) {
                 int x = buffer.consume(name);
-                buffer.produce(x*x, name);
+                int result = x*x;
+                if(result < 0) result = x; // Si al elevarlo al cuadrado, hay overflow, que guarde el número sin elevar.
+                buffer.produce(result, name);
                 Thread.sleep((int) (Math.random() * delay)); // Espera aleatoria (Otras tareas asíncronas)
             }
         } catch (InterruptedException e) {

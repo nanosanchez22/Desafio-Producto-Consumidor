@@ -3,8 +3,8 @@ package com.example;
 public class App 
 {
     public static void main(String[] args) throws InterruptedException {
-        Buffer buffer = new Buffer(30); // Tamaño del buffer
-        Buffer buffer2 = new Buffer(30); // Tamaño del buffer
+        Buffer buffer = new Buffer(30, "Buffer 1"); // Tamaño del buffer
+        Buffer buffer2 = new Buffer(30, "Buffer 2"); // Tamaño del buffer
 
         Proceso1 proceso1 = new Proceso1(buffer, "P1", 500);
         Proceso2 proceso2 = new Proceso2(buffer, "P2", 2000);

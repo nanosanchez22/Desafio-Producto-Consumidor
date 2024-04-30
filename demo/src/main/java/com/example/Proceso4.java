@@ -14,7 +14,6 @@ class Proceso4 extends Thread{
         try {
             while (true) {
                 int x = buffer2.consume(name);
-                System.out.println("Proceso 4: " + x);
                 Thread.sleep((int) (Math.random() * delay)); // Espera aleatoria (Otras tareas asíncronas)
             }
         } catch (InterruptedException e) {

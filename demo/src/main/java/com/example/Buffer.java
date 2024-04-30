@@ -7,8 +7,10 @@ class Buffer {
     private Semaphore mutex;
     private Semaphore empty;
     private Semaphore full;
+    private String name;
 
-    public Buffer(int size) {
+    public Buffer(int size, String name) {
+        this.name = name;
         this.size = size;
         buffer = new int[size];
         for(int i = 0; i < size; i++)
@@ -24,12 +26,17 @@ class Buffer {
         print();
     }
 
+    public String getName()
+    {
+        return name;
+    }
+
     public void produce(int item, String producerName) throws InterruptedException {
         try
         {
             empty.acquire();
             mutex.acquire();
-            System.out.println("El productor " + producerName + " produce: " + item);
+            System.out.println("El productor " + producerName + " inserta: " + item + " en el buffer " + name);
             if(buffer[in] == 0)
             {
                 buffer[in] = item;
@@ -60,7 +67,7 @@ class Buffer {
             buffer[out] = 0;
             consumidos++;
             out = (out + 1) % size;
-            System.out.println("El consumidor " + consumerName + " consume: " + item);
+            System.out.println("El consumidor " + consumerName + " extrae: " + item + " del buffer " + name);
             print();
             mutex.release();
             empty.release();
@@ -75,6 +82,7 @@ class Buffer {
 
     public void print()
     {
+        System.out.println(name + " actual:");
         for(int i = 0; i < size - 1; i++)
         {
             System.out.print("[" + buffer[i] + "] ");    

@@ -17,7 +17,8 @@ class Proceso3 extends Thread{
             while (true) {
                 int x1 = buffer1.consume(name);
                 int x2 = buffer1.consume(name);
-                buffer2.produce(x1+x2, name);
+                int result = x1+x2;
+                buffer2.produce(result, name);
                 Thread.sleep((int) (Math.random() * delay)); // Espera aleatoria (Otras tareas asíncronas)
             }
         } catch (InterruptedException e) {
